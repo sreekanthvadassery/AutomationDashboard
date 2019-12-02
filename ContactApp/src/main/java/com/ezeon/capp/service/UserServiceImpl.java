@@ -20,7 +20,6 @@ import com.ezeon.capp.rm.UserRowMapper;
 @Transactional
 public class UserServiceImpl implements UserService{
 
-	//@Autowired
 	private final UserRepository userRepository;
 	
 	public UserServiceImpl(UserRepository userRepository) {

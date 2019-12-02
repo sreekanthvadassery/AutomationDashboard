@@ -18,6 +18,10 @@
 </head>
 
 <body>
+	
+	<jsp:include page="include/menu.jsp" />
+	<!-- 
+	 Header Section Start 
 	<div role="navigation">
 		<div class="navbar navbar-inverse">
 			<a href="#" class="navbar-brand">ContactApp</a>
@@ -30,6 +34,8 @@
 			</div>
 		</div>
 	</div>
+	 Header Section End 
+ 	-->
 
 	<div class="container" id="homediv">
 		<div class="jumbotron text-center">

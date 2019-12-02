@@ -18,7 +18,10 @@
 </head>
 
 <body>
-	<!-- Header Section Start -->
+
+	<jsp:include page="include/menu.jsp" />
+	<!-- 
+	 Header Section Start 
 	<div role="navigation">
 		<div class="navbar navbar-inverse">
 			<a href="#" class="navbar-brand">ContactApp</a>
@@ -31,7 +34,8 @@
 			</div>
 		</div>
 	</div>
-	<!-- Header Section End -->
+	 Header Section End 
+ 	-->
 
 	<!-- Login User Form Start -->
 	<div class="container text-center">
@@ -48,15 +52,15 @@
 			<div class="form-group">
 				<label class="control-label col-md-3">Username</label>
 				<div class="col-md-7">
-					<input type="text" class="form-control" name="loginName" placeholder="Username"
-						value="${user.loginName }" />
+					<input type="text" class="form-control" name="loginName"
+						placeholder="Username" value="${user.loginName }" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-md-3">Password</label>
 				<div class="col-md-7">
-					<input type="password" class="form-control" name="password" placeholder="Password"
-						value="${user.password }" />
+					<input type="password" class="form-control" name="password"
+						placeholder="Password" value="${user.password }" />
 				</div>
 			</div>
 			<div class="form-group ">
