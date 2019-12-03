@@ -8,7 +8,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta http-equiv="Expires" content="sat, 01 Dec 2001 00:00:00 GMT">
-<title>Contact App | Login</title>
+<title>Contact App | Registration</title>
 <link href="/static/css/bootstrap.min.css" rel="stylesheet">
 <link href="/static/css/style.css" rel="stylesheet">
 <!--[if lt IE 9]>
@@ -21,48 +21,61 @@
 
 	<jsp:include page="include/menu.jsp" />
 
-	<!-- Login User Form Start -->
+	<!-- Registration Form Start -->
 	<div class="container text-center">
-		<h3>User Login</h3>
+		<h3>New Registration</h3>
 		<hr>
-		<form class="form-horizontal" method="POST" action="/login">
-			<!-- ERROR LOGIN START -->
-			<c:if test="${not empty error }">
-				<div class="alert alert-danger">
-					<c:out value="${error }"></c:out>
-				</div>
-			</c:if>
-			<!-- ERROR LOGIN END -->
-			
-			<!-- Successful Logout Start -->
-			<c:if test="${param.action eq 'logout' }">
-				<div class="alert alert-success">
-					<c:out value="Logout Successfully! Thanks for using Contact Application."></c:out>
-				</div>
-			</c:if>
-			<!-- Successful Logout End -->
-			
+		<form class="form-horizontal" method="POST" action="save-user">
+			<input type="hidden" name="id" value="${user.userId }" />
 			<div class="form-group">
-				<label class="control-label col-md-3">Username</label>
+				<label class="control-label col-md-3">Name</label>
 				<div class="col-md-7">
+					<input type="text" class="form-control" name="name"
+						value="${user.name }" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-md-3">Phone</label>
+				<div class="col-md-7">
+					<input type="text" class="form-control" name="phone"
+						value="${user.phone }" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-md-3">Email</label>
+				<div class="col-md-7">
+					<input type="text" class="form-control" name="email"
+						value="${user.email }" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-md-3">Address </label>
+				<div class="col-md-3">
+					<input type="text" class="form-control" name="address"
+						value="${user.address }" /> 
+				</div>
+				
+			</div>
+			<div class="form-group">
+				<label class="control-label col-md-3">Login Name </label>
+				<div class="col-md-3">
 					<input type="text" class="form-control" name="loginName"
-						placeholder="Username" value="${user.loginName }" />
+						value="${user.loginName }" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-md-3">Password</label>
 				<div class="col-md-7">
 					<input type="password" class="form-control" name="password"
-						placeholder="Password" value="${user.password }" />
+						value="${user.password }" />
 				</div>
 			</div>
 			<div class="form-group ">
-				<input type="submit" class="btn btn-primary" value="Login" />
+				<input type="submit" class="btn btn-primary" value="Register" />
 			</div>
 		</form>
 	</div>
-	<!-- Login User Form End -->
-
+	<!-- Registration Form End -->
 
 	<p align="center" class="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
 

@@ -133,4 +133,11 @@ public class User {
 		return this;
 	}
 
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", name=" + name + ", phone=" + phone + ", email=" + email + ", address="
+				+ address + ", loginName=" + loginName + ", password=" + password + ", role=" + role + ", loginStatus="
+				+ loginStatus + ", contacts=" + contacts + "]";
+	}
+
 }
