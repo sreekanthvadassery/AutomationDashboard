@@ -4,7 +4,12 @@ import com.ezeon.capp.domain.User;
 
 public class UserCommand {
 
-	private User user;
+	@Override
+	public String toString() {
+		return "UserCommand [user=" + user + "]";
+	}
+
+	User user;
 	//TODO: Add more fields if required
 
 	public User getUser() {

@@ -22,21 +22,21 @@ import com.ezeon.capp.service.UserService;
  */
 @Controller
 public class UserController {
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@RequestMapping(value= {"/","/index"})
 	public ModelAndView index(@ModelAttribute User user) {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("index"); //JSP - /WEB-INF/view/index.jsp
 		return modelAndView;
 	}
-	
+
 	@PostMapping(value = "/login")
 	public ModelAndView handleLogin(@ModelAttribute LoginCommand user,HttpServletRequest request,HttpSession session) {
 		ModelAndView modelAndView = new ModelAndView();
-		
+
 		try {
 			User loggedInUser = userService.login(user.getLoginName(), user.getPassword());
 			if(loggedInUser==null) {
@@ -72,48 +72,47 @@ public class UserController {
 		}
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = "/reg_form")
 	public ModelAndView registrationForm() {
+		UserCommand userCommand = new UserCommand();
 		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("userCommand", userCommand);
 		modelAndView.setViewName("reg_form"); //JSP
 		return modelAndView;
 	}
-	
+
 	@PostMapping(value = "/save-user")
-	public ModelAndView registerUser(@ModelAttribute User user) {
-		//User user1 = user.getUser();
+	public ModelAndView registerUser(@ModelAttribute("userCommand") UserCommand userCommand) {
+		User user = userCommand.getUser();
 		user.setRole(UserService.ROLE_USER);
 		user.setLoginStatus(UserService.LOGIN_STATUS_ACTIVE);
-		
-		System.out.println(user.toString());
-		
 		userService.register(user);
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("redirect:index?action=reg"); 
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value= {"/user/dashboard"})
 	public ModelAndView userDashboard() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("dashboard_user"); //JSP 
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value= {"/admin/dashboard"})
 	public ModelAndView adminDashboard() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("dashboard_admin"); //JSP 
 		return modelAndView;
 	}
-	
+
 	public void addUserInSession(User user,HttpSession session) {
 		session.setAttribute("user", user);
 		session.setAttribute("userId", user.getUserId());
 		session.setAttribute("role", user.getRole());
 	}
-	
+
 	@RequestMapping(value = "/logout")
 	public ModelAndView logout(HttpSession session) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -121,5 +120,5 @@ public class UserController {
 		modelAndView.setViewName("redirect:index?action=logout");
 		return modelAndView;
 	}
-	
+
 }
