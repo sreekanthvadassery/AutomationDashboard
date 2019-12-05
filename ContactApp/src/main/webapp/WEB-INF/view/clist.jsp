@@ -85,7 +85,7 @@
 							
 							<!-- Create URL for delete -->
 							<s:url var="url_del" value="/user/del-contact">
-								<s:param name="cid" value="${contact.contactId}"></s:param>]
+								<s:param name="cid" value="${contact.contactId}"></s:param>
 							</s:url>
 							<td><a href="${url_del}"><span class="glyphicon glyphicon-trash"></span></a></td>
 						</tr>
