@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -84,11 +85,19 @@ public class UserController {
 
 	@PostMapping(value = "/save-user")
 	public ModelAndView registerUser(@ModelAttribute("userCommand") UserCommand userCommand) {
+		ModelAndView modelAndView = new ModelAndView();
 		User user = userCommand.getUser();
 		user.setRole(UserService.ROLE_USER);
 		user.setLoginStatus(UserService.LOGIN_STATUS_ACTIVE);
-		userService.register(user);
-		ModelAndView modelAndView = new ModelAndView();
+		try {
+			userService.register(user);
+		} 
+		catch (DataIntegrityViolationException e) {
+			e.printStackTrace();
+			modelAndView.addObject("error","Username is already registered. Please select another Username.");
+			modelAndView.setViewName("reg_form"); //JSP
+			return modelAndView;
+		}
 		modelAndView.setViewName("redirect:index?action=reg"); 
 		return modelAndView;
 	}

@@ -9,7 +9,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta http-equiv="Expires" content="sat, 01 Dec 2001 00:00:00 GMT">
-<title>Contact App | Registration</title>
+<title>Contact App | Add Contact</title>
 <link href="/static/css/bootstrap.min.css" rel="stylesheet">
 <link href="/static/css/style.css" rel="stylesheet">
 <!--[if lt IE 9]>
@@ -24,64 +24,57 @@
 
 	<!-- Registration Form Start -->
 	<div class="container text-center">
-		<h3>New Registration</h3>
+		<h3>New Contact</h3>
 		<hr>
 	
-		<!-- ERROR REGISTRATION START -->
+		<!-- ERROR MESSAGE START -->
 		<c:if test="${not empty error }">
 			<div class="alert alert-danger">
 				<c:out value="${error }"></c:out>
 			</div>
 		</c:if>
-		<!-- ERROR REGISTRATION END -->
+		<!-- ERROR MESSAGE END -->
 		
-		<f:form class="form-horizontal" method="POST" action="/save-user"
-			modelAttribute="userCommand">
-			<f:input type="hidden" name="id" path="user.userId" />
+		<f:form class="form-horizontal" method="POST" action="/user/save-contact"
+			modelAttribute="contactCommand">
+			<!-- <f:input type="hidden" name="id" path="contactId" /> -->
 			<div class="form-group">
 				<label class="control-label col-md-3">Name</label>
 				<div class="col-md-7">
 					<f:input type="text" class="form-control" name="name"
-						path="user.name" />
+						path="name" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-md-3">Phone</label>
 				<div class="col-md-7">
 					<f:input type="text" class="form-control" name="phone"
-						path="user.phone" />
+						path="phone" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-md-3">Email</label>
 				<div class="col-md-7">
 					<f:input type="text" class="form-control" name="email"
-						path="user.email" />
+						path="email" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-md-3">Address </label>
 				<div class="col-md-3">
 					<f:textarea type="text" class="form-control" name="address"
-						path="user.address" />
+						path="address" />
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-md-3">Login Name </label>
+				<label class="control-label col-md-3">Remark </label>
 				<div class="col-md-3">
-					<f:input type="text" class="form-control" name="loginName"
-						path="user.loginName" />
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-md-3">Password</label>
-				<div class="col-md-7">
-					<f:input type="password" class="form-control" name="password"
-						path="user.password" />
+					<f:input type="text" class="form-control" name="remark"
+						path="remark" />
 				</div>
 			</div>
 			<div class="form-group ">
-				<input type="submit" class="btn btn-primary" value="Register" />
+				<input type="submit" class="btn btn-primary" value="Save" />
 			</div>
 		</f:form>
 	</div>
