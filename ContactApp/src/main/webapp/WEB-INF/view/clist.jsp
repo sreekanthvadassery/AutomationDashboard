@@ -43,6 +43,14 @@
 			</div>
 		</c:if>
 		<!-- Successful Contact deletion End -->
+		
+		<!-- Successful Contact Edit Start -->
+		<c:if test="${param.action eq 'ed' }">
+			<div class="alert alert-success">
+				<c:out value="Selected contact edited successfully!"></c:out>
+			</div>
+		</c:if>
+		<!-- Successful Contact Edit End -->
 
 		<div class="table-responsive">
 			<table class="table table-striped table-bordered">
@@ -81,13 +89,16 @@
  
  							<!-- Showing 2 ways of passing the contactID in below 2 actions (edit&delete)-->							
 							
-							<td><a href="#"><span class="glyphicon glyphicon-pencil"></span></a></td>
+							<!-- First Way of passing contactId -->
+							<td><a href="/user/edit-contact?cid=${contact.contactId}"><span class="glyphicon glyphicon-pencil"></span></a></td>
 							
+							<!-- Second Way of passing contactId -->
 							<!-- Create URL for delete -->
 							<s:url var="url_del" value="/user/del-contact">
 								<s:param name="cid" value="${contact.contactId}"></s:param>
 							</s:url>
 							<td><a href="${url_del}"><span class="glyphicon glyphicon-trash"></span></a></td>
+							
 						</tr>
 					</c:forEach>
 					<!-- Row Iteration end -->

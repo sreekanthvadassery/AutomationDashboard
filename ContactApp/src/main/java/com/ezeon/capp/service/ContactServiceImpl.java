@@ -35,13 +35,13 @@ public class ContactServiceImpl implements ContactService{
 	@Override
 	public void update(Contact contact) {
 		Optional<Contact> contactFromDb = contactRepository.findById(contact.getContactId());
-		contactFromDb.get().setUserId(contact.getUserId())
+		contactFromDb.get()//.setUserId(contact.getUserId())
 							.setName(contact.getName())
 							.setPhone(contact.getPhone())
 							.setEmail(contact.getEmail())
 							.setAddress(contact.getAddress())
 							.setRemark(contact.getRemark());
-		contactRepository.save(contactFromDb);
+		contactRepository.save(contactFromDb.get());
 	}
 
 	@Override
@@ -67,6 +67,11 @@ public class ContactServiceImpl implements ContactService{
 				+ " FROM contact WHERE userId=? AND "
 				+ "(name LIKE '%"+text+"%' OR phone LIKE '%"+text+"%' OR email LIKE '%"+text+"%' OR address LIKE '%"+text+"%' OR remark LIKE '%"+text+"%' ) ";
 		return jdbcTemplate.query(sql, new ContactRowMapper(),userId);
+	}
+
+	@Override
+	public Contact findByContactId(Integer contactId) {
+		return contactRepository.findByContactId(contactId);
 	}
 
 }

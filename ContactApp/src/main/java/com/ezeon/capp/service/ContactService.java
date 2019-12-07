@@ -29,4 +29,6 @@ public interface ContactService {
 	 */
 	public List<Contact> findUserContact(Integer userId,String text);
 	
+	public Contact findByContactId(Integer contactId);
+	
 }

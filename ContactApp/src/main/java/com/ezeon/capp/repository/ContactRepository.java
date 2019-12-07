@@ -12,5 +12,7 @@ public interface ContactRepository extends JpaRepository<Contact, Integer>{
 	void save(Optional<Contact> contactFromDb);
 	
 	public List<Contact> findByUserId(Integer userId);
+	
+	public Contact findByContactId(Integer contactId);
 
 }
