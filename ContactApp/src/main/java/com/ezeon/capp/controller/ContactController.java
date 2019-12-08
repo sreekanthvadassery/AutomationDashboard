@@ -82,6 +82,16 @@ public class ContactController {
 		modelAndView.setViewName("clist"); //JSP
 		return modelAndView;
 	}
+	
+	@RequestMapping(value = "/user/search-contact")
+	public ModelAndView contactSearch(HttpSession session,@RequestParam("freeText") String freeText) {
+		//Get the userId for the logged in User
+		Integer userId=(Integer) session.getAttribute("userId");
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("contactList", contactService.findUserContact(userId,freeText));
+		modelAndView.setViewName("clist"); //JSP
+		return modelAndView;
+	}
 
 	@RequestMapping(value = "/user/del-contact")
 	public ModelAndView deleteContact(@RequestParam("cid") Integer contactId) {

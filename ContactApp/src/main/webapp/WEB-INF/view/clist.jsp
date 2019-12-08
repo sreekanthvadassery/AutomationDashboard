@@ -1,7 +1,7 @@
 <!DOCTYPE html >
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="f"%>
-<%@taglib uri="http://www.springframework.org/tags" prefix="s" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="s"%>
 
 <html>
 <head>
@@ -35,7 +35,7 @@
 			</div>
 		</c:if>
 		<!-- Successful Contact Added End -->
-		
+
 		<!-- Successful Contact deletion Start -->
 		<c:if test="${param.action eq 'del' }">
 			<div class="alert alert-success">
@@ -43,7 +43,7 @@
 			</div>
 		</c:if>
 		<!-- Successful Contact deletion End -->
-		
+
 		<!-- Successful Contact Edit Start -->
 		<c:if test="${param.action eq 'ed' }">
 			<div class="alert alert-success">
@@ -52,6 +52,23 @@
 		</c:if>
 		<!-- Successful Contact Edit End -->
 
+		<!-- Contact Search start -->
+		<form class="form-horizontal" method="POST"	action="/user/search-contact">
+			<input type="text" class="form-control" value="${param.freeText}" name="freeText"	placeholder="Enter search text" /> 
+			<br> 
+			<input type="submit" class="btn btn-primary" value="Search" />
+		</form>
+		<!-- Contact Search end -->
+		
+		<br>
+		
+		<!-- Clear Search start -->
+		<form class="form-horizontal" method="POST"	action="/user/clist">
+			<input type="submit" class="btn btn-primary" value="Clear Search Filters" />
+		</form>
+		<!-- Clear Search end -->
+		
+		<br>
 		<div class="table-responsive">
 			<table class="table table-striped table-bordered">
 				<thead>
@@ -86,19 +103,21 @@
 							<td>${contact.email}</td>
 							<td>${contact.address}</td>
 							<td>${contact.remark}</td>
- 
- 							<!-- Showing 2 ways of passing the contactID in below 2 actions (edit&delete)-->							
-							
+
+							<!-- Showing 2 ways of passing the contactID in below 2 actions (edit&delete)-->
+
 							<!-- First Way of passing contactId -->
-							<td><a href="/user/edit-contact?cid=${contact.contactId}"><span class="glyphicon glyphicon-pencil"></span></a></td>
-							
+							<td><a href="/user/edit-contact?cid=${contact.contactId}"><span
+									class="glyphicon glyphicon-pencil"></span></a></td>
+
 							<!-- Second Way of passing contactId -->
 							<!-- Create URL for delete -->
 							<s:url var="url_del" value="/user/del-contact">
 								<s:param name="cid" value="${contact.contactId}"></s:param>
 							</s:url>
-							<td><a href="${url_del}"><span class="glyphicon glyphicon-trash"></span></a></td>
-							
+							<td><a href="${url_del}"><span
+									class="glyphicon glyphicon-trash"></span></a></td>
+
 						</tr>
 					</c:forEach>
 					<!-- Row Iteration end -->
