@@ -29,13 +29,14 @@
 <!-- ADMIN MENU START -->
 <c:if test="${sessionScope.userId!=null && sessionScope.role == 1}">
 <%-- Admin is logged in: Admin Menu --%>
+<s:url var="url_ulist" value="/admin/users" />
 <div role="navigation">
 	<div class="navbar navbar-inverse">
 		<a href="#" class="navbar-brand">ContactApp</a>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li><a href="#">Home</a></li>
-				<li><a href="#">User List</a></li>
+				<li><a href="${url_ulist}">User List</a></li>
 				<li><a href="${url_logout}">Logout</a></li>
 			</ul>
 		</div>

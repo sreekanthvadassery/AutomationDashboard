@@ -100,6 +100,14 @@ public class ContactController {
 		modelAndView.setViewName("redirect:clist?action=del"); 
 		return modelAndView;
 	}
+	
+	@RequestMapping(value = "/user/bulk-cdelete")
+	public ModelAndView deleteBulkContact(@RequestParam("cid") Integer[] contactIds) {
+		ModelAndView modelAndView = new ModelAndView();
+		contactService.delete(contactIds);
+		modelAndView.setViewName("redirect:clist?action=del"); 
+		return modelAndView;
+	}
 
 	@RequestMapping(value = "/user/edit-contact")
 	public ModelAndView prepareEditForm(HttpSession session,@RequestParam("cid") Integer contactId) {

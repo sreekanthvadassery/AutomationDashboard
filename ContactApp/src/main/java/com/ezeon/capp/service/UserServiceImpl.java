@@ -59,8 +59,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public List<User> getUserList() {
-		// TODO Auto-generated method stub
-		return null;
+		return userRepository.findByRole(UserService.ROLE_USER);
 	}
 
 	@Override

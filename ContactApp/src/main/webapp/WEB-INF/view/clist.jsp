@@ -39,7 +39,7 @@
 		<!-- Successful Contact deletion Start -->
 		<c:if test="${param.action eq 'del' }">
 			<div class="alert alert-success">
-				<c:out value="Selected contact deleted successfully!"></c:out>
+				<c:out value="Selected contact(s) deleted successfully!"></c:out>
 			</div>
 		</c:if>
 		<!-- Successful Contact deletion End -->
@@ -53,77 +53,90 @@
 		<!-- Successful Contact Edit End -->
 
 		<!-- Contact Search start -->
-		<form class="form-horizontal" method="POST"	action="/user/search-contact">
-			<input type="text" class="form-control" value="${param.freeText}" name="freeText"	placeholder="Enter search text" /> 
-			<br> 
-			<input type="submit" class="btn btn-primary" value="Search" />
+		<form class="form-horizontal" method="POST"
+			action="/user/search-contact">
+			<input type="text" class="form-control" value="${param.freeText}"
+				name="freeText" placeholder="Enter search text" /> <br> <input
+				type="submit" class="btn btn-primary" value="Search" />
 		</form>
 		<!-- Contact Search end -->
-		
+
 		<br>
-		
-		<!-- Clear Search start -->
-		<form class="form-horizontal" method="POST"	action="/user/clist">
-			<input type="submit" class="btn btn-primary" value="Clear Search Filters" />
+
+		<!-- Clear Search button start -->
+		<form class="form-horizontal" method="POST" action="/user/clist">
+			<input type="submit" class="btn btn-primary"
+				value="Clear Search Filters" />
 		</form>
-		<!-- Clear Search end -->
-		
+		<!-- Clear Search button end -->
+
 		<br>
-		<div class="table-responsive">
-			<table class="table table-striped table-bordered">
-				<thead>
-					<tr>
-						<th>Sl#</th>
-						<th>ContactID</th>
-						<th>Name</th>
-						<th>Phone</th>
-						<th>Email</th>
-						<th>Address</th>
-						<th>Remark</th>
-						<th>Edit</th>
-						<th>Delete</th>
-					</tr>
-				</thead>
-				<tbody>
-					<!-- No Records present message start -->
-					<c:if test="${empty contactList}">
+		<!-- Form for bulk delete starts -->
+		<form action="/user/bulk-cdelete">
+			<input type="submit" class="btn btn-primary"
+				value="Delete Selected Records" />
+			
+			<div class="table-responsive">
+			<br>
+				<table class="table table-striped table-bordered">
+					<thead>
 						<tr>
-							<td align="center" colspan="9" class="error">No Records
-								Present</td>
+							<!-- <th>Sl#</th> -->
+							<th>Select</th>
+							<th>ContactID</th>
+							<th>Name</th>
+							<th>Phone</th>
+							<th>Email</th>
+							<th>Address</th>
+							<th>Remark</th>
+							<th>Edit</th>
+							<th>Delete</th>
 						</tr>
-					</c:if>
-					<!-- No Records present message end -->
-					<!-- Row Iteration start -->
-					<c:forEach var="contact" items="${contactList}" varStatus="st">
-						<tr>
-							<td>${st.count}</td>
-							<td>${contact.contactId}</td>
-							<td>${contact.name}</td>
-							<td>${contact.phone}</td>
-							<td>${contact.email}</td>
-							<td>${contact.address}</td>
-							<td>${contact.remark}</td>
-
-							<!-- Showing 2 ways of passing the contactID in below 2 actions (edit&delete)-->
-
-							<!-- First Way of passing contactId -->
-							<td><a href="/user/edit-contact?cid=${contact.contactId}"><span
-									class="glyphicon glyphicon-pencil"></span></a></td>
-
-							<!-- Second Way of passing contactId -->
-							<!-- Create URL for delete -->
-							<s:url var="url_del" value="/user/del-contact">
-								<s:param name="cid" value="${contact.contactId}"></s:param>
-							</s:url>
-							<td><a href="${url_del}"><span
-									class="glyphicon glyphicon-trash"></span></a></td>
-
-						</tr>
-					</c:forEach>
-					<!-- Row Iteration end -->
-				</tbody>
-			</table>
-		</div>
+					</thead>
+					<tbody>
+						<!-- No Records present message start -->
+						<c:if test="${empty contactList}">
+							<tr>
+								<td align="center" colspan="9" class="error">No Records	Present</td>
+							</tr>
+						</c:if>
+						<!-- No Records present message end -->
+						<!-- Row Iteration start -->
+						<c:forEach var="contact" items="${contactList}" varStatus="st">
+							<tr>
+								<!-- <td>${st.count}</td> -->
+								<td><input type="checkbox" name="cid" value="${contact.contactId}" /></td>
+								<td>${contact.contactId}</td>
+								<td>${contact.name}</td>
+								<td>${contact.phone}</td>
+								<td>${contact.email}</td>
+								<td>${contact.address}</td>
+								<td>${contact.remark}</td>
+								<!-- Showing 2 ways of passing the contactID in below 2 actions (edit&delete)-->
+								<!-- First Way of passing contactId -->
+								<td>
+									<a href="/user/edit-contact?cid=${contact.contactId}">
+										<span class="glyphicon glyphicon-pencil"></span>
+									</a>
+								</td>
+								<!-- Second Way of passing contactId -->
+								<!-- Create URL for delete -->
+								<s:url var="url_del" value="/user/del-contact">
+									<s:param name="cid" value="${contact.contactId}"></s:param>
+								</s:url>
+								<td>
+									<a href="${url_del}">
+										<span class="glyphicon glyphicon-trash"></span>
+									</a>
+								</td>
+							</tr>
+						</c:forEach>
+						<!-- Row Iteration end -->
+					</tbody>
+				</table>
+			</div>
+		</form>
+		<!-- Form for bulk delete ends -->
 	</div>
 	<!-- Show All Contacts form End -->
 

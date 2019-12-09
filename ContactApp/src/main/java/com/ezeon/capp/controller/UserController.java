@@ -115,6 +115,14 @@ public class UserController {
 		modelAndView.setViewName("dashboard_admin"); //JSP 
 		return modelAndView;
 	}
+	
+	@RequestMapping(value= {"/admin/users"})
+	public ModelAndView getUserList() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("userList", userService.getUserList());
+		modelAndView.setViewName("users"); //JSP 
+		return modelAndView;
+	}
 
 	public void addUserInSession(User user,HttpSession session) {
 		session.setAttribute("user", user);
