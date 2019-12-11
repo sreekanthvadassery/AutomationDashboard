@@ -21,14 +21,14 @@ import com.ezeon.capp.rm.UserRowMapper;
 public class UserServiceImpl implements UserService{
 
 	private final UserRepository userRepository;
-	
+
 	public UserServiceImpl(UserRepository userRepository) {
 		this.userRepository=userRepository;
 	}
-	
+
 	@Autowired
 	public NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-	
+
 	@Override
 	public void register(User user) {
 		userRepository.save(user);
@@ -38,11 +38,11 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public User login(String loginName, String password) throws UserBlockedException {
 		String sql = "SELECT userId, name, phone, email, address, role, loginStatus, loginName "+
-				 " FROM user WHERE loginName=:ln AND password=:pw";
+				" FROM user WHERE loginName=:ln AND password=:pw";
 		Map map =new HashMap();
 		map.put("ln", loginName);
 		map.put("pw", password);
-		
+
 		try {
 			User user = namedParameterJdbcTemplate.queryForObject(sql, map, new UserRowMapper());
 			if(user.getLoginStatus().equals(UserService.LOGIN_STATUS_BLOCKED)) {
@@ -56,6 +56,25 @@ public class UserServiceImpl implements UserService{
 			return null;
 		}
 	}
+
+	/*
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public User login(String loginName, String password) throws UserBlockedException {
+		try {
+			User user = userRepository.findByLoginNameAndPassword(loginName, password);
+			if(user.getLoginStatus().equals(UserService.LOGIN_STATUS_BLOCKED)) {
+				throw new UserBlockedException("User account has been blocked. Please contact admin.");
+			}
+			else {
+				return user;
+			}
+		} 
+		catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	 */
 
 	@Override
 	public List<User> getUserList() {
